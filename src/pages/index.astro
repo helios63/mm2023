@@ -5,7 +5,6 @@ import { useSanityClient } from 'astro-sanity';
 const posts = await useSanityClient().fetch(`*[_type == "post"]`);
 const pageTitle = "Maxime Mondet";
 
-
 ---
 <BaseLayout pageTitle={ pageTitle }>
     {posts && <ul>

@@ -12,11 +12,15 @@
 body {
     font-family: 'Roboto Mono', monospace;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 200;
     font-size: 14px;
-    line-height: 19px;
+    line-height: 1;
     letter-spacing: 0.01em;
     text-transform: uppercase;
+}
+
+a:hover {
+    font-weight: 500;
 }
 
 h2 {

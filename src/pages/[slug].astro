@@ -18,11 +18,11 @@ export async function getStaticPaths() {
 }
 
 const { slug  } = Astro.params;
-const { title, body, mainImage } = Astro.props;
+const { title, mainImage } = Astro.props;
 ---
 
 <BaseLayout pageTitle={ title }>
   <h1>{ title }</h1>
-  <PortableText portableText={body} />
+  <!-- <PortableText portableText={body} /> -->
   <img src={urlForImage(mainImage).url()} alt={ urlForImage(mainImage).url() } />
 </BaseLayout>
