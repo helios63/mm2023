@@ -1,6 +1,16 @@
 ---
 import BaseLayout from '../layouts/baseLayout.astro';
+import { useSanityClient } from 'astro-sanity';
+
+const posts = await useSanityClient().fetch(`*[_type == "post"]`);
 const pageTitle = "Maxime Mondet";
 
+
 ---
-<BaseLayout pageTitle={pageTitle}></BaseLayout>
+<BaseLayout pageTitle={ pageTitle }>
+    {posts && <ul>
+        {posts.map((post) => (
+            <li><a href={post.slug.current}>{post.title}</a></li>
+        ))}
+    </ul>}
+</BaseLayout>

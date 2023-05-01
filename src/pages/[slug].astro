@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/baseLayout.astro';
+import PortableText from "../components/PortableText.astro";
+import { useSanityClient } from 'astro-sanity';
+import { urlForImage } from '../sanity/urlForImage';
+
+export async function getStaticPaths() {
+  const posts = await useSanityClient().fetch(`*[_type == "post"]`);
+
+  return posts.map((post) => {
+    return {
+      params: {
+        slug: post.slug?.current || '',
+      },
+      props: { ...post },
+    };
+  });
+}
+
+const { slug  } = Astro.params;
+const { title, body, mainImage } = Astro.props;
+---
+
+<BaseLayout pageTitle={ title }>
+  <h1>A post about { title }</h1>
+  <PortableText portableText={body} />
+  <img src={urlForImage(mainImage).url()} alt={ urlForImage(mainImage).url() } />
+</BaseLayout>
