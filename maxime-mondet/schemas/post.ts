@@ -37,18 +37,48 @@ export default defineType({
       name: 'categories',
       title: 'Categories',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      of: [{type: 'reference', to: {type: 'category'}}], 
     }),
     defineField({
-      name: 'publishedAt',
-      title: 'Published at',
-      type: 'datetime',
+      type: 'object',
+      name: 'credits',
+      fieldsets: [
+        {name: 'credits', title: 'Credits'}
+      ],
+      fields: [
+        {
+          title: 'Code',
+          name: 'code',
+          type: 'string',
+          fieldset: 'credits'
+        },
+        {
+          title: 'Design',
+          name: 'design',
+          type: 'string',
+          fieldset: 'credits'
+        },
+        {
+          title: 'Photo',
+          name: 'photo',
+          type: 'string',
+          fieldset: 'credits'
+        },
+        {
+          title: 'Client',
+          name: 'client',
+          type: 'string',
+          fieldset: 'credits'
+        }
+      ]
     }),
     defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'blockContent',
+      title: 'Gallery',
+      name: 'gallery',
+      type: 'array',
+      of: [{type: 'image'}]
     }),
+    
   ],
 
   preview: {

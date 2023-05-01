@@ -22,7 +22,7 @@ const { title, body, mainImage } = Astro.props;
 ---
 
 <BaseLayout pageTitle={ title }>
-  <h1>A post about { title }</h1>
+  <h1>{ title }</h1>
   <PortableText portableText={body} />
   <img src={urlForImage(mainImage).url()} alt={ urlForImage(mainImage).url() } />
 </BaseLayout>
