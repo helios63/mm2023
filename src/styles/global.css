@@ -7,7 +7,16 @@
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-  }
+}
+
+@font-face {
+    font-family: 'HealTheWebB-Regular';
+    src: url('/fonts/HealTheWebB-Regular.otf') format('otf');
+    src: url('/fonts/HealTheWebB-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
 body {
     font-family: 'Roboto Mono', monospace;
@@ -24,7 +33,7 @@ a:hover {
 }
 
 h2 {
-    font-family: 'HealTheWebA-Regular', 'sans-serif';
+    font-family: 'HealTheWebB-Regular', 'sans-serif';
     font-style: normal;
     font-weight: 400;
     font-size: 38px;

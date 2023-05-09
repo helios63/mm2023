@@ -18,7 +18,6 @@ const { pageTitle } = Astro.props;
         <main class="w-full h-full container mx-auto text-center flex items-center justify-center">
             <Header />
 				<div class="w-full">
-					<h2 class="hidden">{pageTitle}</h2>
 					<slot /> <!-- your content is injected here -->
 				</div>
 			<Footer />
