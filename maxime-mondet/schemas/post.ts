@@ -10,6 +10,7 @@ export default defineType({
       title: 'Title',
       type: 'string',
     }),
+    
     defineField({
       name: 'slug',
       title: 'Slug',
@@ -19,12 +20,14 @@ export default defineType({
         maxLength: 96,
       },
     }),
+    
     defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',
       to: {type: 'author'},
     }),
+
     defineField({
       name: 'mainImage',
       title: 'Main image',
@@ -33,12 +36,14 @@ export default defineType({
         hotspot: true,
       },
     }),
+
     defineField({
       name: 'categories',
       title: 'Categories',
       type: 'array',
       of: [{type: 'reference', to: {type: 'category'}}], 
     }),
+
     defineField({
       type: 'object',
       name: 'credits',
@@ -72,11 +77,19 @@ export default defineType({
         }
       ]
     }),
+
     defineField({
       title: 'Gallery',
       name: 'gallery',
       type: 'array',
       of: [{type: 'image'}]
+    }),
+
+    defineField({
+      title: 'Videos',
+      name: 'videos',
+      type: 'array',
+      of: [{type: 'file'}]
     }),
     
   ],
