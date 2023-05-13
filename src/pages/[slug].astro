@@ -1,28 +1,40 @@
 ---
 import BaseLayout from '../layouts/baseLayout.astro';
-import PortableText from "../components/PortableText.astro";
 import { useSanityClient } from 'astro-sanity';
 import { urlForImage } from '../sanity/urlForImage';
 
 export async function getStaticPaths() {
   const posts = await useSanityClient().fetch(`*[_type == "post"]`);
+  const videos = await useSanityClient().fetch(`*[_type == "post"]{"imageUrls": videos[].asset->url}`);
+
+  // console.log(videos)
 
   return posts.map((post) => {
     return {
       params: {
         slug: post.slug?.current || '',
       },
-      props: { ...post },
+      props: { ...post, videos },
     };
   });
 }
 
-const { slug  } = Astro.params;
-const { title, mainImage } = Astro.props;
+const { slug } = Astro.params;
+const { title, mainImage, videos } = Astro.props;
 ---
 
 <BaseLayout pageTitle={ title }>
-  <h2>{ title }</h2>
-  <!-- <PortableText portableText={body} /> -->
+  <h2 class="mt-16 md:mt-8 mb-8">{ title }</h2>
   <img src={urlForImage(mainImage).url()} alt={ urlForImage(mainImage).url() } />
+  
+  <div class="videos">
+    {videos.map((videoGroup, index) => (
+      <div key={index}>
+        {videoGroup.imageUrls.map((url, i) => (
+          <video src={url} playsInline autoPlay muted loop key={i} class="py-4"></video>
+        ))}
+      </div>
+    ))}
+  </div>
+  
 </BaseLayout>

@@ -7,7 +7,7 @@ const pageTitle = "Maxime Mondet";
 
 ---
 <BaseLayout pageTitle={ pageTitle }>
-    {posts && <ul>
+    {posts && <ul class="h-screen flex items-center justify-center">
         {posts.map((post) => (
             <li><a href={post.slug.current}>{post.title}</a></li>
         ))}
