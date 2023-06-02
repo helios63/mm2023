@@ -18,6 +18,10 @@
     font-display: swap;
 }
 
+html {
+    height: -webkit-fill-available;
+  }
+
 body {
     font-family: 'Roboto Mono', monospace;
     font-style: normal;
@@ -26,7 +30,11 @@ body {
     line-height: 1;
     letter-spacing: 0.01em;
     text-transform: uppercase;
+
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
 }
+
 
 a:hover {
     font-weight: 500;
