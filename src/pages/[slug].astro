@@ -49,7 +49,7 @@ const { title, mainImage, videos, credits } = Astro.props;
     {videos.map((videoGroup, index) => (
       <div key={index}>
         {videoGroup.videoUrls.map((url, i) => (
-          <video src={url} playsInline autoPlay muted loop key={i} class="pb-4"></video>
+          <video src={url} playsInline autoPlay muted loop disableRemotePlayback key={i} class="pb-4"></video>
         ))}
       </div>
     ))}
