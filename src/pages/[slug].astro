@@ -44,7 +44,8 @@ const { title, mainImage, videos, credits } = Astro.props;
     )}
   </div>  
 
-  <img class="pb-4" src={urlForImage(mainImage).url()} alt={ urlForImage(mainImage).url() } />
+  <img class="pb-4" src={mainImage ? urlForImage(mainImage).url() : ''} alt={mainImage ? urlForImage(mainImage).url() : ''} />
+  
   <div class="videos">
     {videos.map((videoGroup, index) => (
       <div key={index}>
