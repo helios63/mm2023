@@ -2,14 +2,23 @@
 import BaseLayout from '../layouts/baseLayout.astro';
 import { useSanityClient } from 'astro-sanity';
 
+
 const posts = await useSanityClient().fetch(`*[_type == "post"]`);
 const pageTitle = "Maxime Mondet";
 
+
 ---
-<BaseLayout pageTitle={ pageTitle }>
-    {posts && <ul class="flex flex-col items-center justify-center">
+<BaseLayout pageTitle={pageTitle}>
+    {posts && (
+      <ul class="flex flex-col items-center justify-center">
         {posts.map((post) => (
-            <li class="py-1"><a href={post.slug.current}>{post.title}</a></li>
+          <li class="py-1">
+            <a href={post.slug.current}>
+              <h2>{post.title}</h2>
+            </a>
+          </li>
         ))}
-    </ul>}
-</BaseLayout>
+      </ul>
+    )}
+  </BaseLayout>
+  

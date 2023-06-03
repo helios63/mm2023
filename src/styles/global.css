@@ -42,12 +42,4 @@ a:hover {
 
 h2 {
     font-family: 'HealTheWebB-Regular', 'sans-serif';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 38px;
-    line-height: 23px;
-    /* identical to box height, or 61% */
-
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
 }

@@ -5,33 +5,51 @@ import { urlForImage } from '../sanity/urlForImage';
 
 export async function getStaticPaths() {
   const posts = await useSanityClient().fetch(`*[_type == "post"]`);
-  const videos = await useSanityClient().fetch(`*[_type == "post"]{"videoUrls": videos[].asset->url}`);
 
-  console.log(videos)
-
-  return posts.map((post) => {
+  const paths = posts.map(async (post) => {
+    const videos = await useSanityClient().fetch(`*[_id == "${post._id}"]{"videoUrls": videos[].asset->url}`);
+    const credits = post.credits;
     return {
       params: {
         slug: post.slug?.current || '',
       },
-      props: { ...post, videos },
+      props: { ...post, videos, credits },
     };
   });
+
+  return Promise.all(paths);
 }
 
 const { slug } = Astro.params;
-const { title, mainImage, videos } = Astro.props;
+const { title, mainImage, videos, credits } = Astro.props;
 ---
 
 <BaseLayout pageTitle={ title }>
-  <h2 class="mt-16 md:mt-8 mb-8">{ title }</h2>
-  <img src={urlForImage(mainImage).url()} alt={ urlForImage(mainImage).url() } />
-  
+  <h2 class="text-xl mt-16 md:mt-8 mb-8">{ title }</h2>
+
+  <div class="flex flex-col pb-4 text-xs">
+    {credits && (
+      <div class="flex flex-row justify-between">
+        <div>Code</div>
+        <div>{credits.code}</div>
+      </div>
+      <div class="flex flex-row justify-between">
+        <div>Design</div>
+        <div>{credits.design}</div>
+      </div>
+      <div class="flex flex-row justify-between">
+        <div>Client</div>
+        <div>{credits.client}</div>
+      </div>
+    )}
+  </div>  
+
+  <img class="pb-4" src={urlForImage(mainImage).url()} alt={ urlForImage(mainImage).url() } />
   <div class="videos">
     {videos.map((videoGroup, index) => (
       <div key={index}>
         {videoGroup.videoUrls.map((url, i) => (
-          <video src={url} playsInline autoPlay muted loop key={i} class="py-4"></video>
+          <video src={url} playsInline autoPlay muted loop key={i} class="pb-4"></video>
         ))}
       </div>
     ))}
