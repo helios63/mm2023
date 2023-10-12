@@ -1,13 +1,35 @@
 ---
+let title = 'Maxime Mondet'
 
+export async function getStaticPaths() {
+  const posts = await useSanityClient().fetch(`*[_type == "post"]`);
+
+  const paths = posts.map(async (post) => {
+    title = post.slug?.current === '' ? 'Back' : 'Maxime Mondet'
+
+    return {
+      params: {
+        slug: post.slug?.current || '',
+      },
+      props: { ...post, videos, credits },
+    };
+  });
+
+  return Promise.all(paths);
+}
 
 ---
-<header class="fixed w-full md:w-auto h-auto md:h-screen text-center flex items-center justify-center top-0 md:bottom-0 left-0 p-4 mix-blend-difference">
-    <div class="container">
-      <a class="logo" href="/">
-        Maxime Mondet
-      </a>
-    </div>
+
+<header
+  class="fixed w-full md:w-auto h-auto md:h-screen text-center flex items-center justify-center top-0 md:bottom-0 left-0 p-4 mix-blend-difference"
+>
+  <div class="container">
+    <a class="logo" href="/">{title}</a>
+  </div>
 </header>
 
-<img class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10" src="maximemondet.svg" alt="Maxime Mondet">
+<img
+  class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10"
+  src="maximemondet.svg"
+  alt="Maxime Mondet"
+/>

@@ -1,24 +1,51 @@
 ---
-import BaseLayout from '../layouts/baseLayout.astro';
-import { useSanityClient } from 'astro-sanity';
+import BaseLayout from '../layouts/baseLayout.astro'
+import { useSanityClient } from 'astro-sanity'
+// import { homeBlur } from '../js/HomeBlur'
 
+async function fetchPosts() {
+  const posts = await useSanityClient().fetch(`*[_type == "post"]`)
+  const videoUrlsPromises = posts.map(async (post) => {
+    const videos = await useSanityClient().fetch(
+      `*[_id == "${post._id}"]{"videoUrls": videos[0].asset->url}`
+    )
+    const firstVideoUrl = videos[0]?.videoUrls // Get the first video URL if available
+    return { ...post, videoUrl: firstVideoUrl } // Add the videoUrl property to the post object
+  })
 
-const posts = await useSanityClient().fetch(`*[_type == "post"]`);
-const pageTitle = "Maxime Mondet";
+  return Promise.all(videoUrlsPromises)
+}
 
-
+const postsWithVideoUrls = await fetchPosts()
+const pageTitle = 'Maxime Mondet'
 ---
+
 <BaseLayout pageTitle={pageTitle}>
-    {posts && (
-      <ul class="flex flex-col items-center justify-center">
-        {posts.map((post) => (
-          <li class="py-1">
-            <a href={post.slug.current}>
-              <h2>{post.title}</h2>
+  {
+    postsWithVideoUrls && (
+      <ul class="grid grid-cols-1 md:grid-cols-3 xxl:grid-cols-5 gap-16">
+        {postsWithVideoUrls.map((post) => (
+          <li class="post py-1 group/thumbnail relative" key={post._id}>
+            <h2 class="opacity-0 absolute top-1/2 left-1/2 z-10 -translate-y-1/2	-translate-x-1/2 transition-all pointer-events-none	group-hover/thumbnail:opacity-100 mix-blend-difference">
+              {post.title}
+            </h2>
+            <a class="" href={post.slug.current}>
+              {post.videoUrl && (
+                <div class="thumbnail">
+                  <video
+                    class="blur-md group-hover/thumbnail:blur-sm transition-all duration-700"
+                    playsinline
+                    muted
+                    autoplay
+                    loop
+                    src={post.videoUrl}
+                  />
+                </div>
+              )}
             </a>
           </li>
         ))}
       </ul>
-    )}
-  </BaseLayout>
-  
+    )
+  }
+</BaseLayout>
