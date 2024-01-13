@@ -31,14 +31,8 @@ const pageTitle = 'Maxime Mondet'
             </h2>
             <a class="" href={post.slug.current}>
               {post.videoUrl && (
-                <div class="thumbnail blur-md group-hover/thumbnail:blur-sm transition-all duration-700">
-                  <video
-                    playsinline
-                    muted
-                    autoplay
-                    loop
-                    src={post.videoUrl}
-                  />
+                <div class="thumbnail blur-sm group-hover/thumbnail:blur-none transition-all duration-700">
+                  <video playsinline muted autoplay loop src={post.videoUrl} />
                 </div>
               )}
             </a>
