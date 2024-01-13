@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
-import vercel from '@astrojs/vercel/serverless';
-
 import sanity from "astro-sanity";
+
+import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,9 +10,9 @@ export default defineConfig({
     projectId: 's4uuoklk',
     dataset: 'production',
     apiVersion: '2023-02-08',
-    useCdn: false,
+    useCdn: false
   })],
-  output: 'server',
+  output: "server",
   adapter: vercel({
     webAnalytics: {
       enabled: true,
