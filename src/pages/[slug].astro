@@ -3,11 +3,13 @@ import BaseLayout from '../layouts/baseLayout.astro';
 import { useSanityClient } from 'astro-sanity';
 import { urlForImage } from '../sanity/urlForImage';
 
+export const prerender = true
 export async function getStaticPaths() {
   const posts = await useSanityClient().fetch(`*[_type == "post"]`);
 
   const paths = posts.map(async (post) => {
     const videos = await useSanityClient().fetch(`*[_id == "${post._id}"]{"videoUrls": videos[].asset->url}`);
+    console.log(videos)
     const credits = post.credits;
     return {
       params: {
@@ -19,6 +21,7 @@ export async function getStaticPaths() {
 
   return Promise.all(paths);
 }
+
 
 // const { slug } = Astro.params;
 const { title, mainImage, videos, credits } = Astro.props;
@@ -47,7 +50,7 @@ const { title, mainImage, videos, credits } = Astro.props;
   <img class="pb-4" src={mainImage ? urlForImage(mainImage).url() : ''} alt={mainImage ? urlForImage(mainImage).url() : ''} />
 
   <div class="videos">
-    {videos.map((videoGroup, index) => (
+    {videos && videos.map((videoGroup, index) => (
       <div key={index}>
         {videoGroup.videoUrls.map((url, i) => (
           <video src={url} playsInline autoPlay muted loop disableRemotePlayback key={i} class="pb-4"></video>

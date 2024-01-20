@@ -29,7 +29,7 @@ const pageTitle = 'Maxime Mondet'
             <h2 class="opacity-0 absolute top-1/2 left-1/2 z-10 -translate-y-1/2	-translate-x-1/2 transition-all pointer-events-none	group-hover/thumbnail:opacity-100 mix-blend-difference">
               {post.title}
             </h2>
-            <a class="" href={post.slug.current}>
+            <a class="bg-slate-900" href={post.slug.current}>
               {post.videoUrl && (
                 <div class="thumbnail blur-sm group-hover/thumbnail:blur-none transition-all duration-700">
                   <video playsinline muted autoplay loop src={post.videoUrl} />
