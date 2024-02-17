@@ -1,0 +1,21 @@
+<script>
+  import GlslCanvas from 'glslCanvas'
+  import { frag } from '../js/frag'
+
+  const vert = `
+  main() {
+    gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+  }
+  `
+
+  // Ensure async execution
+  var canvas = document.createElement('canvas')
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+  var sandbox = new GlslCanvas(canvas)
+  document.querySelector('.background').appendChild(canvas)
+  sandbox.load(frag)
+
+</script>
+
+<div class="background fixed top-0 left-0 w-full h-screen"></div>
