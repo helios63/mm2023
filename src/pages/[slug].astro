@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 
   const paths = posts.map(async (post) => {
     const videos = await useSanityClient().fetch(`*[_id == "${post._id}"]{"videoUrls": videos[].asset->url}`);
-    console.log(videos)
+    // console.log(videos)
     const credits = post.credits;
     return {
       params: {

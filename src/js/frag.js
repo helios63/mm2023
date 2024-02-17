@@ -52,10 +52,14 @@ void main(void)
 {
     vec2 uv = v_texcoord;
 
+    vec2 mouse = u_mouse / u_resolution;
+    float dist = distance(uv, mouse);
+    float strenght = smoothstep(0.5, 0.0, dist);
+
     vec4 color1 = vec4(0.0, 0.0, 0.0, 1.0);
     vec4 color2 = vec4(1.0, 1.0, 1.0, 1.0);
 
-    float grain = mix(-0.05, 0.15, rand(uv));
+    float grain = mix(-0.05, 0.15 + strenght, rand(uv));
 
     // make movement for Fbm
     vec2 movement = vec2(u_time * 0.001, u_time * -0.001);
