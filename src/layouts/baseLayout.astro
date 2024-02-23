@@ -5,6 +5,7 @@ import TheBackground from '../components/TheBackground.astro'
 import '../styles/global.css'
 import { ViewTransitions } from 'astro:transitions';
 import { fade } from "astro:transitions";
+import  SpeedInsights  from "@vercel/speed-insights/astro"
 
 const { pageTitle } = Astro.props
 ---
@@ -30,6 +31,7 @@ const { pageTitle } = Astro.props
       </div>
       <Footer />
       <TheBackground />
+      <SpeedInsights />
     </main>
   </body>
 </html>

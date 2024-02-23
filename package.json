@@ -14,6 +14,7 @@
     "@astrojs/vercel": "^6.1.4",
     "@sanity/astro": "^2.2.1",
     "@sanity/client": "^6.13.3",
+    "@vercel/speed-insights": "^1.0.10",
     "astro": "^4.1.2",
     "astro-sanity": "^1.1.7",
     "glslCanvas": "^0.2.6",
